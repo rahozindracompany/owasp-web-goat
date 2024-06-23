@@ -1,11 +1,12 @@
-# OWASP WebGoat Indra Fork 
+# OWASP WebGoat Indra Fork
 
 Aplicación que se basa en el proyecto https://github.com/WebGoat/WebGoat, el cual tiene de manera deliberada muchas vulnerabilidades actuales del mercado y pretendemos identificar con el escaneo con SonarQube, como ejercicio práctico en la comunidad Java Indra Colombia.
 
 **WebGoat** es una aplicación web de código abierto desarrollada por OWASP que se utiliza para enseñar y practicar técnicas de seguridad web. Sirve como una plataforma educativa para aprender sobre vulnerabilidades comunes y cómo explotarlas, así como para comprender cómo proteger las aplicaciones contra estos ataques. Se puede utilizar junto con herramientas como SonarQube para analizar y mejorar la seguridad del código, identificando y solucionando problemas de seguridad potenciales.
 
 ## Tecnologías que utiliza
-- Java 17 o 21
+
+- Java 17
 - Maven
 - IDE preferido
 - Git o Git suportado en IDE
@@ -32,16 +33,16 @@ Lo primero que afirman todos los piratas informáticos.*
 
 ![WebGoat](docs/images/webgoat.png)
 
-
 ## Inicio rápido
 
 ```bash
 git clone https://github.com/rahozindracompany/owasp-web-goat.git
 cd owasp-web-goat
 mvn clean install
-mnv sonar:sonar
+mvn sonar:sonar
 mvn spring-boot:run
 ```
+
 Abrir URL en navegador:
 
- http://localhost:8080/WebGoat
+http://localhost:8080/WebGoat
