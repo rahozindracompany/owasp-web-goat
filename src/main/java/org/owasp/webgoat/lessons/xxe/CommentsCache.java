@@ -95,18 +95,26 @@ public class CommentsCache {
    */
   protected Comment parseXml(String xml) throws XMLStreamException, JAXBException {
     var jc = JAXBContext.newInstance(Comment.class);    
-    var xif = XMLInputFactory.newInstance();
+    var xif = XMLInputFactory.newFactory();
+
+    // Deshabilitar el procesamiento de entidades externas para prevenir ataques XXE
+    xif.setProperty(XMLInputFactory.IS_SUPPORTING_EXTERNAL_ENTITIES, Boolean.FALSE);
+    xif.setProperty(XMLInputFactory.SUPPORT_DTD, Boolean.FALSE); // Deshabilitar DTDs
 
     if (webSession.isSecurityEnabled()) {
-      xif.setProperty(XMLInputFactory.SUPPORT_DTD, false); // Disable DTDs
-      xif.setProperty(XMLInputFactory.IS_SUPPORTING_EXTERNAL_ENTITIES, false); // Disable external entities
+        xif.setProperty(XMLConstants.ACCESS_EXTERNAL_DTD, ""); // Compliant
+        xif.setProperty(XMLConstants.ACCESS_EXTERNAL_SCHEMA, ""); // Compliant
     }
 
     var xsr = xif.createXMLStreamReader(new StringReader(xml));
 
     var unmarshaller = jc.createUnmarshaller();
+    // Asegurarse de que el unmarshaller no procese entidades externas
+    unmarshaller.setProperty(XMLConstants.ACCESS_EXTERNAL_DTD, "");
+    unmarshaller.setProperty(XMLConstants.ACCESS_EXTERNAL_SCHEMA, "");
+
     return (Comment) unmarshaller.unmarshal(xsr);
-  }
+}
 
   protected Optional<Comment> parseJson(String comment) {
     ObjectMapper mapper = new ObjectMapper();
