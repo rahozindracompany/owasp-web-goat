@@ -94,9 +94,9 @@ public class CommentsCache {
    * Comment class can be directly used in the controller method (instead of a String)
    */
   protected Comment parseXml(String xml) throws XMLStreamException, JAXBException {
-    var jc = JAXBContext.newInstance(Comment.class);
-    jc.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
+    var jc = JAXBContext.newInstance(Comment.class);    
     var xif = XMLInputFactory.newInstance();
+    xif.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
 
     if (webSession.isSecurityEnabled()) {
       xif.setProperty(XMLConstants.ACCESS_EXTERNAL_DTD, ""); // Compliant
