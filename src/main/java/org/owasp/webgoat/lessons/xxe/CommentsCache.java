@@ -95,6 +95,7 @@ public class CommentsCache {
    */
   protected Comment parseXml(String xml) throws XMLStreamException, JAXBException {
     var jc = JAXBContext.newInstance(Comment.class);
+    jc.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
     var xif = XMLInputFactory.newInstance();
 
     if (webSession.isSecurityEnabled()) {
